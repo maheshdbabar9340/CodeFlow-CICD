@@ -1,0 +1,130 @@
+git init
+
+git remote add origin https://github.com/maheshdbabar9340/CodeFlow-CICD.git
+
+git add .
+
+check for .gitignore file if not then create new one
+
+git commit -m "creting codeflow node.js app"
+
+git push origin master
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+On the server side:
+
+Create a server on Digital Ocean
+
+1. Create new - Droplets 
+2. Choose image - ubuntu
+3. Choose Plans - 
+4. Choose datacenter
+5. select IP v6
+6. Use SSH keys by creating new ssh key
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Create a new user
+Install Ngnix server
+Go to the Github Actions and check for workflows
+
+Instead of that go to the settings -> Actions -> Runners
+We will install runner - 
+Add runner
+Choose OS
+Architechure
+
+Create our folder
+Download runner - copy that curl -- something by putting sudo as administrator
+Track the installer
+sudo tar abc ---- 
+It should extract
+
+Configure now ->
+copy that and paste 
+
+sudo chmod -R 777 /var/mywebsite
+
+paste last line
+
+Enter runner name: Anything
+
+
+
+check runner from settings folder - whether it is offline or online
+íf offline start that server
+
+ls
+ssv.sh
+
+to install and start
+
+sudo ./ssv.sh install
+sudo ./ssv.sh start
+
+idle state - it's running but waiting to something to happen
+
+
+Configure Ngnix
+
+cd /etc/ngnix/sites-available/
+ls
+sudo nano default
+
+root /var/www/mywebsite/_work/react_cicd/react_cicd
+
+change our code
+sudo nano default
+sudo service ngnix restart
+
+sudo visudo -f /etc/sudoers.d/username
+
+sudo reboot
+
+create new folder in github -> .github
+another folder -> workflows
+inside that new yml file -> website.yml
+
+
+file creation _
+
+name: node.js CI
+
+on:
+	push:
+		branches: [ master ]
+	pull_request:
+		branches: [ master ]
+
+jobs:
+	build:
+		runs-on: self-hosted
+	
+		steps:
+		- uses: actions/checkout@v2
+		- name: Use Node.js ${{ matrix.node-version }}
+			uses: actions/setup-node@v1
+			with:
+				node-version: ${{ matrix.node-version }}
+
+		- run:
+			npm i
+			cd frontend
+			npm i
+			npm run build
+			cd ..
+			pm2 stop 0
+			pm2 start 0
+			pm2 save
+			sudo service ngnix restart
+			
+
+ 
+git add .
+git commit -m "configured all files"
+git push origin master
+
+goto Actions -> Job -> look everything is runnning
+
+
